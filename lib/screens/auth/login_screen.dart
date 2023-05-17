@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                     text: 'New to PAOTSIN?', fontSize: 12, color: Colors.grey),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SignupScreen()));
                   },
                   child: TextBold(

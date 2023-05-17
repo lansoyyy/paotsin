@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu/screens/auth/login_screen.dart';
+import 'package:menu/screens/home_screen.dart';
 import 'package:menu/widgets/button_widget.dart';
 import 'package:menu/widgets/text_widget.dart';
 import 'package:menu/widgets/textfield_widget.dart';
@@ -52,7 +53,10 @@ class SignupScreen extends StatelessWidget {
             ),
             ButtonWidget(
               label: 'Signup',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen()));
+              },
             ),
             const SizedBox(
               height: 10,
