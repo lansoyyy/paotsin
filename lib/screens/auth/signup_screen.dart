@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:menu/screens/auth/signup_screen.dart';
+import 'package:menu/screens/auth/login_screen.dart';
 import 'package:menu/widgets/button_widget.dart';
 import 'package:menu/widgets/text_widget.dart';
 import 'package:menu/widgets/textfield_widget.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignupScreen extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final nameController = TextEditingController();
 
-  LoginScreen({super.key});
+  SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 75,
             ),
-            TextBold(text: 'Welcome to', fontSize: 18, color: Colors.purple),
+            TextBold(text: 'Registration', fontSize: 18, color: Colors.purple),
             const SizedBox(
               height: 20,
             ),
@@ -32,6 +33,10 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(
               height: 20,
+            ),
+            TextFieldWidget(label: 'Full Name', controller: nameController),
+            const SizedBox(
+              height: 10,
             ),
             TextFieldWidget(label: 'Username', controller: usernameController),
             const SizedBox(
@@ -46,7 +51,7 @@ class LoginScreen extends StatelessWidget {
               height: 50,
             ),
             ButtonWidget(
-              label: 'Login',
+              label: 'Signup',
               onPressed: () {},
             ),
             const SizedBox(
@@ -56,14 +61,16 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextRegular(
-                    text: 'New to PAOTSIN?', fontSize: 12, color: Colors.grey),
+                    text: 'Already had an account?',
+                    fontSize: 12,
+                    color: Colors.grey),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => SignupScreen()));
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   child: TextBold(
-                      text: 'Register now', fontSize: 14, color: Colors.purple),
+                      text: 'Login now', fontSize: 14, color: Colors.purple),
                 ),
               ],
             ),
