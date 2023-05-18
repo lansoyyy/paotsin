@@ -1,17 +1,29 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:menu/data/menu_data.dart';
 import 'package:menu/screens/auth/login_screen.dart';
 import 'package:menu/widgets/text_widget.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _speech = stt.SpeechToText();
+  bool _isListening = false;
+  String _text = 'Press the button and start speaking';
+  double _confidence = 1.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        title: TextRegular(
-          text: 'MENU',
+        title: TextBold(
+          text: 'PAOTSIN',
           fontSize: 18,
           color: Colors.white,
         ),
@@ -70,16 +82,102 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-              child: Card(
-                elevation: 3,
+        padding: const EdgeInsets.all(16.0),
+        itemCount: paotsinMenu.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 16.0,
+          childAspectRatio: 1.0,
+        ),
+        itemBuilder: (context, index) {
+          final menu = paotsinMenu[index];
+          return Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.0),
+                color: Colors.black,
+                image: const DecorationImage(
+                    image: AssetImage('assets/images/back.jpg'),
+                    opacity: 125,
+                    fit: BoxFit.cover),
               ),
-            );
-          }),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${menu['code']}',
+                    style: const TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'QBold',
+                        color: Colors.white),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Text(
+                    '${menu['item']}',
+                    style: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'QRegular',
+                        color: Colors.white),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    '${menu['price']}',
+                    style: const TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'QRegular',
+                        color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: AvatarGlow(
+        animate: _isListening,
+        glowColor: Colors.purple,
+        endRadius: 75.0,
+        duration: const Duration(milliseconds: 2000),
+        repeatPauseDuration: const Duration(milliseconds: 100),
+        repeat: true,
+        child: FloatingActionButton(
+          backgroundColor: Colors.purple,
+          onPressed: _listen,
+          child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+        ),
+      ),
     );
+  }
+
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+            if (val.hasConfidenceRating && val.confidence > 0) {
+              _confidence = val.confidence;
+            }
+          }),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
   }
 }

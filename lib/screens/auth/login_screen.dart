@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:menu/screens/auth/signup_screen.dart';
+import 'package:menu/screens/home_screen.dart';
 import 'package:menu/widgets/button_widget.dart';
 import 'package:menu/widgets/text_widget.dart';
 import 'package:menu/widgets/textfield_widget.dart';
@@ -53,8 +54,8 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 if (box.read('username') == usernameController.text &&
                     box.read('password') == passwordController.text) {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => SignupScreen()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen()));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
