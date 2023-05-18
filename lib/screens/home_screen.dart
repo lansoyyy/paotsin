@@ -201,77 +201,161 @@ class _HomeScreenState extends State<HomeScreen> {
             List<String> words = val.recognizedWords.toUpperCase().split(' ');
 
             if (words.contains('D1')) {
-              cartData.add({
-                'code': 'D1',
-                'item': 'Dumplings (Solo)',
-                'price': '₱47.00',
-              });
+              if (cartData.contains({
+                    'code': 'D1',
+                    'item': 'Dumplings (Solo)',
+                    'price': '₱47.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'D1',
+                  'item': 'Dumplings (Solo)',
+                  'price': '₱47.00',
+                });
+              }
             } else if (words.contains('D2')) {
-              cartData.add({
-                'code': 'D2',
-                'item': 'Dumplings (Fried)',
-                'price': '₱47.00',
-              });
+              if (cartData.contains({
+                    'code': 'D2',
+                    'item': 'Dumplings (Fried)',
+                    'price': '₱47.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'D2',
+                  'item': 'Dumplings (Fried)',
+                  'price': '₱47.00',
+                });
+              }
             } else if (words.contains('D3')) {
-              cartData.add({
-                'code': 'D3',
-                'item': 'Dumplings (Steamed)',
-                'price': '₱47.00',
-              });
+              if (cartData.contains({
+                    'code': 'D3',
+                    'item': 'Dumplings (Steamed)',
+                    'price': '₱47.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'D3',
+                  'item': 'Dumplings (Steamed)',
+                  'price': '₱47.00',
+                });
+              }
             } else if (words.contains('DR1')) {
-              cartData.add({
-                'code': 'DR1',
-                'item': 'Dumplings on Hainanese Rice',
-                'price': '₱65.00',
-              });
+              if (cartData.contains({
+                    'code': 'DR1',
+                    'item': 'Dumplings on Hainanese Rice',
+                    'price': '₱65.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'DR1',
+                  'item': 'Dumplings on Hainanese Rice',
+                  'price': '₱65.00',
+                });
+              }
             } else if (words.contains('DR2')) {
-              cartData.add({
-                'code': 'DR2',
-                'item': 'Dumplings on Lemak Rice',
-                'price': '₱65.00',
-              });
+              if (cartData.contains({
+                    'code': 'DR2',
+                    'item': 'Dumplings on Lemak Rice',
+                    'price': '₱65.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'DR2',
+                  'item': 'Dumplings on Lemak Rice',
+                  'price': '₱65.00',
+                });
+              }
             } else if (words.contains('AR1')) {
-              cartData.add({
-                'code': 'AR1',
-                'item': 'Asian Chicken on Hainanese Rice',
-                'price': '₱85.00',
-              });
+              if (cartData.contains({
+                    'code': 'AR1',
+                    'item': 'Asian Chicken on Hainanese Rice',
+                    'price': '₱85.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'AR1',
+                  'item': 'Asian Chicken on Hainanese Rice',
+                  'price': '₱85.00',
+                });
+              }
             } else if (words.contains('AR2')) {
-              cartData.add({
-                'code': 'AR2',
-                'item': 'Asian Chicken on Lemak Rice',
-                'price': '₱85.00',
-              });
+              if (cartData.contains({
+                    'code': 'AR2',
+                    'item': 'Asian Chicken on Lemak Rice',
+                    'price': '₱85.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'AR2',
+                  'item': 'Asian Chicken on Lemak Rice',
+                  'price': '₱85.00',
+                });
+              }
             } else if (words.contains('CR1')) {
-              cartData.add({
-                'code': 'CR1',
-                'item': 'Crackling Pork with Hainanese Rice',
-                'price': '₱90.00',
-              });
+              if (cartData.contains({
+                    'code': 'CR1',
+                    'item': 'Crackling Pork with Hainanese Rice',
+                    'price': '₱90.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'CR1',
+                  'item': 'Crackling Pork with Hainanese Rice',
+                  'price': '₱90.00',
+                });
+              }
             } else if (words.contains('CR2')) {
-              cartData.add({
-                'code': 'CR2',
-                'item': 'Crackling Pork with Lemak Rice',
-                'price': '₱90.00',
-              });
+              if (cartData.contains({
+                    'code': 'CR2',
+                    'item': 'Crackling Pork with Lemak Rice',
+                    'price': '₱90.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'CR2',
+                  'item': 'Crackling Pork with Lemak Rice',
+                  'price': '₱90.00',
+                });
+              }
             } else if (words.contains('L1')) {
-              cartData.add({
-                'code': 'L1',
-                'item': 'Dumplings on Laksa',
-                'price': '₱75.00',
-              });
+              if (cartData.contains({
+                    'code': 'L1',
+                    'item': 'Dumplings on Laksa',
+                    'price': '₱75.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'L1',
+                  'item': 'Dumplings on Laksa',
+                  'price': '₱75.00',
+                });
+              }
             } else if (words.contains('L2')) {
-              cartData.add({
-                'code': 'L2',
-                'item': 'Asian Chicken on Laksa',
-                'price': '₱90.00',
-              });
+              if (cartData.contains({
+                    'code': 'L2',
+                    'item': 'Asian Chicken on Laksa',
+                    'price': '₱90.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'L2',
+                  'item': 'Asian Chicken on Laksa',
+                  'price': '₱90.00',
+                });
+              }
             } else if (words.contains('L3')) {
-              cartData.add({
-                'code': 'L3',
-                'item': 'Crackling Pork with Laksa',
-                'price': '₱100.00',
-              });
+              if (cartData.contains({
+                    'code': 'L3',
+                    'item': 'Crackling Pork with Laksa',
+                    'price': '₱100.00',
+                  }) ==
+                  false) {
+                cartData.add({
+                  'code': 'L3',
+                  'item': 'Crackling Pork with Laksa',
+                  'price': '₱100.00',
+                });
+              }
             }
           }),
         );
