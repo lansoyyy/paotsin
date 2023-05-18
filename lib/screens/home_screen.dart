@@ -106,13 +106,17 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 final menu = paotsinMenu[index];
                 return Card(
-                  elevation: 4.0,
+                  elevation: 10.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(
+                        color: Colors.purple,
+                        width: 2,
+                      ),
                       color: Colors.black,
                       image: const DecorationImage(
                           image: AssetImage('assets/images/back.jpg'),
