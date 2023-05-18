@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.purple,
         title: TextBold(
-          text: 'PAOTSIN',
+          text: 'MENU',
           fontSize: 18,
           color: Colors.white,
         ),
@@ -131,13 +131,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.white),
                         ),
                         const SizedBox(height: 10.0),
-                        Text(
-                          '${menu['item']}',
-                          style: const TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'QRegular',
-                              color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Text(
+                            '${menu['item']}',
+                            style: const TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'QRegular',
+                                color: Colors.white),
+                          ),
                         ),
                         const SizedBox(height: 8.0),
                         Text(
