@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu/data/cart_list.dart';
+import 'package:menu/screens/checkout_screen.dart';
 
 import '../widgets/text_widget.dart';
 
@@ -47,9 +48,10 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                             MaterialButton(
                               onPressed: () async {
-                                // Navigator.of(context).pushReplacement(
-                                //     MaterialPageRoute(
-                                //         builder: (context) => LoginScreen()));
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CheckoutScreen()));
                               },
                               child: const Text(
                                 'Continue',
