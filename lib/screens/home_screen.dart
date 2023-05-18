@@ -13,10 +13,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _speech = stt.SpeechToText();
   bool _isListening = false;
-  String _text = 'Press the button and start speaking';
-  double _confidence = 1.0;
+  String _text = '';
+
+  late stt.SpeechToText _speech;
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,66 +88,73 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: paotsinMenu.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 16.0,
-          crossAxisSpacing: 16.0,
-          childAspectRatio: 1.0,
-        ),
-        itemBuilder: (context, index) {
-          final menu = paotsinMenu[index];
-          return Card(
-            elevation: 4.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.black,
-                image: const DecorationImage(
-                    image: AssetImage('assets/images/back.jpg'),
-                    opacity: 125,
-                    fit: BoxFit.cover),
+      body: _text == ''
+          ? GridView.builder(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: paotsinMenu.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16.0,
+                crossAxisSpacing: 16.0,
+                childAspectRatio: 1.0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${menu['code']}',
-                    style: const TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'QBold',
-                        color: Colors.white),
+              itemBuilder: (context, index) {
+                final menu = paotsinMenu[index];
+                return Card(
+                  elevation: 4.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
                   ),
-                  const SizedBox(height: 10.0),
-                  Text(
-                    '${menu['item']}',
-                    style: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'QRegular',
-                        color: Colors.white),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: Colors.black,
+                      image: const DecorationImage(
+                          image: AssetImage('assets/images/back.jpg'),
+                          opacity: 125,
+                          fit: BoxFit.cover),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${menu['code']}',
+                          style: const TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'QBold',
+                              color: Colors.white),
+                        ),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          '${menu['item']}',
+                          style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'QRegular',
+                              color: Colors.white),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          '${menu['price']}',
+                          style: const TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'QRegular',
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    '${menu['price']}',
-                    style: const TextStyle(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'QRegular',
-                        color: Colors.white),
-                  ),
-                ],
+                );
+              },
+            )
+          : Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Center(
+                child: TextBold(text: _text, fontSize: 32, color: Colors.black),
               ),
             ),
-          );
-        },
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
         animate: _isListening,
@@ -151,7 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
         repeat: true,
         child: FloatingActionButton(
           backgroundColor: Colors.purple,
-          onPressed: _listen,
+          onPressed: () {
+            _listen();
+          },
           child: Icon(_isListening ? Icons.mic : Icons.mic_none),
         ),
       ),
@@ -168,16 +184,25 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() => _isListening = true);
         _speech.listen(
           onResult: (val) => setState(() {
-            _text = val.recognizedWords;
-            if (val.hasConfidenceRating && val.confidence > 0) {
-              _confidence = val.confidence;
+            _text = val.recognizedWords.toUpperCase();
+
+            List<String> words = val.recognizedWords.toUpperCase().split(' ');
+
+            if (words.contains('B1')) {
+              print('true');
+            } else {
+              print('false');
             }
           }),
         );
       }
     } else {
-      setState(() => _isListening = false);
+      setState(() {
+        _isListening = false;
+        _text = '';
+      });
       _speech.stop();
     }
+    print(_text);
   }
 }

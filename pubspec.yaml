@@ -38,6 +38,7 @@ dependencies:
   get_storage:
   speech_to_text:
   avatar_glow:
+  badges:
 
 dev_dependencies:
   flutter_test:
