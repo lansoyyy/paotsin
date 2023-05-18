@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:menu/screens/auth/signup_screen.dart';
 import 'package:menu/widgets/button_widget.dart';
 import 'package:menu/widgets/text_widget.dart';
@@ -9,6 +10,8 @@ class LoginScreen extends StatelessWidget {
   final passwordController = TextEditingController();
 
   LoginScreen({super.key});
+
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,22 @@ class LoginScreen extends StatelessWidget {
             ),
             ButtonWidget(
               label: 'Login',
-              onPressed: () {},
+              onPressed: () {
+                if (box.read('username') == usernameController.text &&
+                    box.read('password') == passwordController.text) {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignupScreen()));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: TextRegular(
+                          text: 'Invalid account! Cannot Procceed',
+                          fontSize: 12,
+                          color: Colors.white),
+                    ),
+                  );
+                }
+              },
             ),
             const SizedBox(
               height: 10,

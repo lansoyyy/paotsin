@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:menu/screens/auth/login_screen.dart';
 import 'package:menu/screens/home_screen.dart';
 import 'package:menu/widgets/button_widget.dart';
@@ -11,6 +12,8 @@ class SignupScreen extends StatelessWidget {
   final nameController = TextEditingController();
 
   SignupScreen({super.key});
+
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +57,17 @@ class SignupScreen extends StatelessWidget {
             ButtonWidget(
               label: 'Signup',
               onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: TextRegular(
+                        text: 'Account created succesfully!',
+                        fontSize: 12,
+                        color: Colors.white),
+                  ),
+                );
+                box.write('username', usernameController.text);
+                box.write('name', nameController.text);
+                box.write('password', passwordController.text);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => const HomeScreen()));
               },
